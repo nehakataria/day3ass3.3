@@ -1,0 +1,50 @@
+Q1.List the components of Hadoop 2.x and explain them in detail.
+A1
+Hadoop 2.x has the following three Major Components:
+1.HDFS
+2.YARN
+3.MapReduce
+These three are also known as Three Pillars of Hadoop. Here major key component change is YARN. It is really game
+changing component in BigData Hadoop System.
+
+1.HDFS:
+HDFS holds very large amount of data and provides easier access. To store such huge data, the files are stored across
+multiple machines. These files are stored in redundant fashion to rescue the system from possible data losses in case of failure.
+HDFS also makes applications available to parallel processing.
+              a)Namenode
+                        The namenode is the commodity hardware that contains the GNU/Linux operating system and the namenode
+                        software. It is a software that can be run on commodity hardware. The system having the namenode acts as
+                        the master server and it does the following tasks:
+                                1)Manages the file system namespace.
+                                2)Regulates client’s access to files.
+                                3)It also executes file system operations such as renaming, closing, and opening files and directories.
+              b)Datanode
+                        The datanode is a commodity hardware having the GNU/Linux operating system and datanode software.
+                        For every node (Commodity hardware/System) in a cluster, there will be a datanode. These nodes manage the data 
+                        storage of their system.
+                                1) Datanodes perform read-write operations on the file systems, as per client request.
+                                2)They also perform operations such as block creation, deletion, and replication according to
+                                the instructions of the namenode.
+2.YARN:
+The fundamental idea of YARN is to split up the functionalities of resource management and job scheduling/monitoring into separate
+daemons. The idea is to have a global ResourceManager (RM) and per-application ApplicationMaster (AM). An application is either a
+single job or a DAG of jobs.
+The ResourceManager and the NodeManager form the data-computation framework. The ResourceManager is the ultimate authority that
+arbitrates resources among all the applications in the system. The NodeManager is the per-machine framework agent who is responsible 
+for containers, monitoring their resource usage (cpu, memory, disk, network) and reporting the same to the ResourceManager/Scheduler.
+The per-application ApplicationMaster is, in effect, a framework specific library and is tasked with negotiating resources from the 
+ResourceManager and working with the NodeManager(s) to execute and monitor the tasks.
+
+3.MapReduce:
+Hadoop MapReduce is a software framework for easily writing applications which process vast amounts of data (multi-terabyte data-sets)
+in-parallel on large clusters (thousands of nodes) of commodity hardware in a reliable, fault-tolerant manner.
+A MapReduce job usually splits the input data-set into independent chunks which are processed by the map tasks in a completely 
+parallel manner. The framework sorts the outputs of the maps, which are then input to the reduce tasks. Typically both the input 
+and the output of the job are stored in a file-system. The framework takes care of scheduling tasks, monitoring them and re-executes
+the failed tasks.
+Typically the compute nodes and the storage nodes are the same, that is, the MapReduce framework and the Hadoop Distributed
+File System (see HDFS Architecture Guide) are running on the same set of nodes. This configuration allows the framework to effectively
+schedule tasks on the nodes where data is already present, resulting in very high aggregate bandwidth across the cluster.
+        1)master daemon-resource manager
+        2)slave daemon-node manager
+
